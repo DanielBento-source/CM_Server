@@ -1,4 +1,5 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
+import { CreateMusicoDto } from './dto/create-musico.dto';
 import { MusicoService } from './musico.service';
 
 @Controller('musico')
@@ -11,7 +12,7 @@ export class MusicoController {
   }
 
   @Post()
-  create() {
-    return this.musicoService.create();
+  create(@Body() createMusicoDto: CreateMusicoDto) {
+    return this.musicoService.create(createMusicoDto);
   }
 }
