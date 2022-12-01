@@ -7,7 +7,7 @@ export class MusicoService {
   musicos: Musico[] = [];
 
   findAll() {
-    return 'buscar todos os musicos';
+    return this.musicos;
   }
 
   create(createMusicoDto: CreateMusicoDto) {
