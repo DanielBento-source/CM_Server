@@ -7,11 +7,15 @@ import { Musico } from './entities/musico.entity';
 export class MusicoService {
   constructor(private readonly prisma: PrismaService) {}
 
-  findAll() {
+  findAll(): Promise<Musico[]> {
     return this.prisma.musico.findMany();
   }
 
-  create(dto: CreateMusicoDto) {
+  findOne(id: string): Promise<Musico> {
+    return this.prisma.musico.findUnique({ where: { id } });
+  }
+
+  create(dto: CreateMusicoDto): Promise<Musico> {
     const data: Musico = { ...dto };
 
     return this.prisma.musico.create({ data });
