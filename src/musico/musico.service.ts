@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateMusicoDto } from './dto/create-musico.dto';
+import { UpdateMusicoDto } from './dto/update-musico.dto';
 import { Musico } from './entities/musico.entity';
 
 @Injectable()
@@ -19,5 +20,13 @@ export class MusicoService {
     const data: Musico = { ...dto };
 
     return this.prisma.musico.create({ data });
+  }
+
+  update(id: string, dto: UpdateMusicoDto): Promise<Musico> {
+    const data: Partial<Musico> = { ...dto };
+    return this.prisma.musico.update({
+      where: { id },
+      data,
+    });
   }
 }
