@@ -1,4 +1,4 @@
 export class Musico {
-  id: string;
+  id?: string;
   nome: string;
 }

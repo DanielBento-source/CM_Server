@@ -1,19 +1,19 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateMusicoDto } from './dto/create-musico.dto';
 import { Musico } from './entities/musico.entity';
 
 @Injectable()
 export class MusicoService {
-  musicos: Musico[] = [];
+  constructor(private readonly prisma: PrismaService) {}
 
   findAll() {
-    return this.musicos;
+    return this.prisma.musico.findMany();
   }
 
-  create(createMusicoDto: CreateMusicoDto) {
-    const musico: Musico = { id: ' random_id', ...createMusicoDto };
+  create(dto: CreateMusicoDto) {
+    const data: Musico = { ...dto };
 
-    this.musicos.push(musico);
-    return musico;
+    return this.prisma.musico.create({ data });
   }
 }

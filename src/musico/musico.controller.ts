@@ -6,7 +6,7 @@ import { MusicoService } from './musico.service';
 @ApiTags('musico')
 @Controller('musico')
 export class MusicoController {
-  constructor(private musicoService: MusicoService) {}
+  constructor(private readonly musicoService: MusicoService) {}
 
   @Get()
   findAll() {
@@ -14,7 +14,7 @@ export class MusicoController {
   }
 
   @Post()
-  create(@Body() createMusicoDto: CreateMusicoDto) {
-    return this.musicoService.create(createMusicoDto);
+  create(@Body() dto: CreateMusicoDto) {
+    return this.musicoService.create(dto);
   }
 }
