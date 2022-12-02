@@ -1,4 +1,14 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CreateMusicoDto } from './dto/create-musico.dto';
 import { UpdateMusicoDto } from './dto/update-musico.dto';
@@ -43,5 +53,14 @@ export class MusicoController {
     @Body() dto: UpdateMusicoDto,
   ): Promise<Musico> {
     return this.musicoService.update(id, dto);
+  }
+
+  @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiOperation({
+    summary: 'Deletar um musíco pelo Id',
+  })
+  delete(@Param('id') id: string) {
+    this.musicoService.delete(id);
   }
 }

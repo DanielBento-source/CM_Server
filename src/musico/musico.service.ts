@@ -29,4 +29,10 @@ export class MusicoService {
       data,
     });
   }
+
+  async delete(id: string) {
+    await this.prisma.musico.delete({
+      where: { id },
+    });
+  }
 }
