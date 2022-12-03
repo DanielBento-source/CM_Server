@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateMusicoDto } from './dto/create-musico.dto';
 import { UpdateMusicoDto } from './dto/update-musico.dto';
@@ -12,8 +12,15 @@ export class MusicoService {
     return this.prisma.musico.findMany();
   }
 
-  findOne(id: string): Promise<Musico> {
-    return this.prisma.musico.findUnique({ where: { id } });
+  async findOne(id: string): Promise<Musico> {
+    const record = await this.prisma.musico.findUnique({ where: { id } });
+
+    if (!record) {
+      throw new NotFoundException(
+        `Registro do musíco com o ID '${id}' não encontrado.`,
+      );
+    }
+    return record;
   }
 
   create(dto: CreateMusicoDto): Promise<Musico> {
