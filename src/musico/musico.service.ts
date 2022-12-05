@@ -12,7 +12,7 @@ export class MusicoService {
     return this.prisma.musico.findMany();
   }
 
-  async findOne(id: string): Promise<Musico> {
+  async findById(id: string): Promise<Musico> {
     const record = await this.prisma.musico.findUnique({ where: { id } });
 
     if (!record) {
@@ -23,13 +23,18 @@ export class MusicoService {
     return record;
   }
 
+  async findOne(id: string): Promise<Musico> {
+    return this.findById(id);
+  }
+
   create(dto: CreateMusicoDto): Promise<Musico> {
     const data: Musico = { ...dto };
 
     return this.prisma.musico.create({ data });
   }
 
-  update(id: string, dto: UpdateMusicoDto): Promise<Musico> {
+  async update(id: string, dto: UpdateMusicoDto): Promise<Musico> {
+    await this.findById(id);
     const data: Partial<Musico> = { ...dto };
     return this.prisma.musico.update({
       where: { id },
