@@ -43,6 +43,8 @@ export class MusicoService {
   }
 
   async delete(id: string) {
+    await this.findById(id);
+
     await this.prisma.musico.delete({
       where: { id },
     });
