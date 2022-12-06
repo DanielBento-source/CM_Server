@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsOptional, IsString } from 'class-validator';
+import { IsOptional, IsString, IsUrl } from 'class-validator';
 
 export class CreateMusicoDto {
   @IsString()
@@ -10,6 +10,7 @@ export class CreateMusicoDto {
   nome: string;
 
   @IsString()
+  @IsUrl()
   @ApiProperty({
     description: 'url da foto do musíco',
     example: 'ausfdbweufbwuebfwiebfw',
