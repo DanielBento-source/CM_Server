@@ -11,11 +11,41 @@ datasource db {
 }
 
 model Musico {
+  id               String @id @default(uuid())
+  nome             String @unique
+  foto             String
+  dataDeNascimento String @map("data_de_nascimento")
+  fone             String
+  email            String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("musico")
+}
+
+model Instrumento {
   id   String @id @default(uuid())
   nome String @unique
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
-  @@map("musico")
+  @@map("instrumento")
+}
+
+model User {
+  id         String @id @default(uuid())
+  nickname   String @unique
+  password   String
+  localidade String @unique
+  fone       String
+  email      String
+  cooperador String
+  anciao     String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("user")
 }
