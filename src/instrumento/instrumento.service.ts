@@ -12,15 +12,15 @@ export class InstrumentoService {
     return `This action returns all instrumento`;
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return `This action returns a #${id} instrumento`;
   }
 
-  update(id: number, updateInstrumentoDto: UpdateInstrumentoDto) {
+  update(id: string, updateInstrumentoDto: UpdateInstrumentoDto) {
     return `This action updates a #${id} instrumento`;
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} instrumento`;
   }
 }

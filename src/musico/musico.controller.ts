@@ -58,9 +58,9 @@ export class MusicoController {
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({
-    summary: 'Deletar um musíco pelo Id',
+    summary: 'remover um musíco pelo Id',
   })
-  delete(@Param('id') id: string) {
-    this.musicoService.delete(id);
+  remove(@Param('id') id: string) {
+    this.musicoService.remove(id);
   }
 }
