@@ -5,4 +5,6 @@ export class Musico {
   dataDeNascimento: string;
   fone: string;
   email: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
