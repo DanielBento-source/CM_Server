@@ -35,14 +35,14 @@ model Instrumento {
 }
 
 model User {
-  id         String @id @default(uuid())
-  nickname   String @unique
-  password   String
-  localidade String @unique
-  fone       String
-  email      String
-  cooperador String
-  anciao     String
+  id           String @id @default(uuid())
+  cadUserGeral Int    @unique @default(autoincrement()) @map("cad_user_geral")
+  nome         String
+  sobrenome    String
+  nickname     String @unique
+  password     String
+  fone         String
+  email        String
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
