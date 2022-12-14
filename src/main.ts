@@ -13,6 +13,7 @@ async function bootstrap() {
     .setDescription('Aplicação para gestão dos muscicos da ccb')
     .setVersion('1.0.0')
     .addTag('status')
+    .addTag('user')
     .addTag('musico')
     .addTag('instrumento')
     .build();
