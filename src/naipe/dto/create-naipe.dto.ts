@@ -1,1 +1,3 @@
-export class CreateNaipeDto {}
+export class CreateNaipeDto {
+  nome: string;
+}

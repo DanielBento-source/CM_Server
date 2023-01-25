@@ -1,1 +1,4 @@
-export class Naipe {}
+export class Naipe {
+  id: string;
+  nome: string;
+}

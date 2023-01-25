@@ -1,11 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { CreateNaipeDto } from './dto/create-naipe.dto';
 import { UpdateNaipeDto } from './dto/update-naipe.dto';
+import { Naipe } from './entities/naipe.entity';
 
 @Injectable()
 export class NaipeService {
+  naipes: Naipe[] = [];
+
   create(createNaipeDto: CreateNaipeDto) {
-    return 'This action adds a new naipe';
+    const naipe: Naipe = { id: 'random_id', ...createNaipeDto };
+
+    this.naipes.push(naipe);
+
+    return naipe;
   }
 
   findAll() {
