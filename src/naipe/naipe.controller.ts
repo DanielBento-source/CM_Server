@@ -1,9 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { NaipeService } from './naipe.service';
 import { CreateNaipeDto } from './dto/create-naipe.dto';
 import { UpdateNaipeDto } from './dto/update-naipe.dto';
+import { ApiTags } from '@nestjs/swagger';
 
-@Controller('naipe')
+@ApiTags('naipe')
+@Controller()
 export class NaipeController {
   constructor(private readonly naipeService: NaipeService) {}
 
