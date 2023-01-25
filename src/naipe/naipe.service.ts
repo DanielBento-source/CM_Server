@@ -16,7 +16,7 @@ export class NaipeService {
   }
 
   findAll() {
-    return `This action returns all naipe`;
+    return this.naipes;
   }
 
   findOne(id: number) {
