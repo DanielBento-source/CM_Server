@@ -7,5 +7,5 @@ export class CreateNaipeDto {
     description: 'nome do naipe',
     example: 'cordas',
   })
-  nome: string;
+  name: string;
 }
