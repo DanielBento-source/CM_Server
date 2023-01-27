@@ -17,12 +17,12 @@ import { ApiTags } from '@nestjs/swagger';
 export class NaipeController {
   constructor(private readonly naipeService: NaipeService) {}
 
-  @Post()
-  create(@Body() createNaipeDto: CreateNaipeDto) {
-    return this.naipeService.create(createNaipeDto);
+  @Post('naipe')
+  create(@Body() dto: CreateNaipeDto) {
+    return this.naipeService.create(dto);
   }
 
-  @Get()
+  @Get('naipe')
   findAll() {
     return this.naipeService.findAll();
   }

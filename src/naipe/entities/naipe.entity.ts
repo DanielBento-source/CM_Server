@@ -1,4 +1,4 @@
 export class Naipe {
-  id: string;
+  id?: string;
   name: string;
 }

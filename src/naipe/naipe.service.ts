@@ -1,22 +1,23 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateNaipeDto } from './dto/create-naipe.dto';
 import { UpdateNaipeDto } from './dto/update-naipe.dto';
 import { Naipe } from './entities/naipe.entity';
 
 @Injectable()
 export class NaipeService {
-  naipes: Naipe[] = [];
+  constructor(private readonly prisma: PrismaService) {}
 
-  create(createNaipeDto: CreateNaipeDto) {
-    const naipe: Naipe = { id: 'random_id', ...createNaipeDto };
+  create(dto: CreateNaipeDto) {
+    const data: Naipe = { ...dto };
 
-    this.naipes.push(naipe);
-
-    return naipe;
+    return this.prisma.naipe.create({
+      data,
+    });
   }
 
   findAll() {
-    return this.naipes;
+    return this.prisma.naipe.findMany();
   }
 
   findOne(id: number) {

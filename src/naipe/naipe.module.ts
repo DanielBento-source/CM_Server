@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
-import { NaipeService } from './naipe.service';
+import { PrismaModule } from 'src/prisma/prisma.module';
 import { NaipeController } from './naipe.controller';
+import { NaipeService } from './naipe.service';
 
 @Module({
+  imports: [PrismaModule],
   controllers: [NaipeController],
-  providers: [NaipeService]
+  providers: [NaipeService],
 })
 export class NaipeModule {}
