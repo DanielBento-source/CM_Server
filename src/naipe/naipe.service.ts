@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnprocessableEntityException,
+} from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateNaipeDto } from './dto/create-naipe.dto';
 import { UpdateNaipeDto } from './dto/update-naipe.dto';
@@ -11,9 +15,11 @@ export class NaipeService {
   create(dto: CreateNaipeDto): Promise<Naipe> {
     const data: Naipe = { ...dto };
 
-    return this.prisma.naipe.create({
-      data,
-    });
+    return this.prisma.naipe
+      .create({
+        data,
+      })
+      .catch(this.handleError);
   }
 
   findAll(): Promise<Naipe[]> {
@@ -38,10 +44,12 @@ export class NaipeService {
     await this.findById(id);
     const data: Partial<Naipe> = { ...dto };
 
-    return this.prisma.naipe.update({
-      where: { id },
-      data,
-    });
+    return this.prisma.naipe
+      .update({
+        where: { id },
+        data,
+      })
+      .catch(this.handleError);
   }
 
   async remove(id: string) {
@@ -50,5 +58,13 @@ export class NaipeService {
     await this.prisma.naipe.delete({
       where: { id },
     });
+  }
+
+  handleError(error: Error): undefined {
+    const errorLines = error.message?.split('\n');
+    const lastErrorLine = errorLines[errorLines.length - 1]?.trim();
+    throw new UnprocessableEntityException(
+      lastErrorLine || 'Algum erro ocorreu ao executar a operação',
+    );
   }
 }
