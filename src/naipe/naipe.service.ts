@@ -8,7 +8,7 @@ import { Naipe } from './entities/naipe.entity';
 export class NaipeService {
   constructor(private readonly prisma: PrismaService) {}
 
-  create(dto: CreateNaipeDto) {
+  create(dto: CreateNaipeDto): Promise<Naipe> {
     const data: Naipe = { ...dto };
 
     return this.prisma.naipe.create({
@@ -16,12 +16,14 @@ export class NaipeService {
     });
   }
 
-  findAll() {
+  findAll(): Promise<Naipe[]> {
     return this.prisma.naipe.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} naipe`;
+  findOne(id: string): Promise<Naipe> {
+    return this.prisma.naipe.findUnique({
+      where: { id },
+    });
   }
 
   update(id: number, updateNaipeDto: UpdateNaipeDto) {

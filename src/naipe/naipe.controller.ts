@@ -10,26 +10,36 @@ import {
 import { NaipeService } from './naipe.service';
 import { CreateNaipeDto } from './dto/create-naipe.dto';
 import { UpdateNaipeDto } from './dto/update-naipe.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Naipe } from './entities/naipe.entity';
 
 @ApiTags('naipe')
-@Controller()
+@Controller('naipe')
 export class NaipeController {
   constructor(private readonly naipeService: NaipeService) {}
 
-  @Post('naipe')
-  create(@Body() dto: CreateNaipeDto) {
+  @Post()
+  @ApiOperation({
+    summary: 'Cadastrar um naipe',
+  })
+  create(@Body() dto: CreateNaipeDto): Promise<Naipe> {
     return this.naipeService.create(dto);
   }
 
-  @Get('naipe')
-  findAll() {
+  @Get()
+  @ApiOperation({
+    summary: 'Listar todos os naipes',
+  })
+  findAll(): Promise<Naipe[]> {
     return this.naipeService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.naipeService.findOne(+id);
+  @ApiOperation({
+    summary: 'Buscar um naipe pelo Id',
+  })
+  findOne(@Param('id') id: string): Promise<Naipe> {
+    return this.naipeService.findOne(id);
   }
 
   @Patch(':id')
