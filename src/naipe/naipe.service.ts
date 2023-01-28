@@ -35,7 +35,9 @@ export class NaipeService {
     });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} naipe`;
+  async remove(id: string) {
+    await this.prisma.naipe.delete({
+      where: { id },
+    });
   }
 }

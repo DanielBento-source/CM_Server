@@ -6,12 +6,14 @@ import {
   Patch,
   Param,
   Delete,
+  HttpStatus,
 } from '@nestjs/common';
 import { NaipeService } from './naipe.service';
 import { CreateNaipeDto } from './dto/create-naipe.dto';
 import { UpdateNaipeDto } from './dto/update-naipe.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Naipe } from './entities/naipe.entity';
+import { HttpCode } from '@nestjs/common/decorators';
 
 @ApiTags('naipe')
 @Controller('naipe')
@@ -51,7 +53,11 @@ export class NaipeController {
   }
 
   @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiOperation({
+    summary: 'Remover um naipe pelo Id',
+  })
   remove(@Param('id') id: string) {
-    return this.naipeService.remove(+id);
+    this.naipeService.remove(id);
   }
 }
