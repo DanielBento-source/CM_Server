@@ -20,7 +20,7 @@ export class NaipeService {
     return this.prisma.naipe.findMany();
   }
 
-  async findOne(id: string): Promise<Naipe> {
+  async findById(id: string): Promise<Naipe> {
     const record = await this.prisma.naipe.findUnique({
       where: { id },
     });
@@ -30,8 +30,12 @@ export class NaipeService {
     }
     return record;
   }
+  async findOne(id: string): Promise<Naipe> {
+    return this.findById(id);
+  }
 
-  update(id: string, dto: UpdateNaipeDto): Promise<Naipe> {
+  async update(id: string, dto: UpdateNaipeDto): Promise<Naipe> {
+    await this.findById(id);
     const data: Partial<Naipe> = { ...dto };
 
     return this.prisma.naipe.update({
