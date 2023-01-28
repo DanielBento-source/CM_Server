@@ -45,6 +45,8 @@ export class NaipeService {
   }
 
   async remove(id: string) {
+    await this.findById(id);
+
     await this.prisma.naipe.delete({
       where: { id },
     });
