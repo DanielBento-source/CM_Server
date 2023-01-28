@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateNaipeDto } from './dto/create-naipe.dto';
 import { UpdateNaipeDto } from './dto/update-naipe.dto';
@@ -20,10 +20,15 @@ export class NaipeService {
     return this.prisma.naipe.findMany();
   }
 
-  findOne(id: string): Promise<Naipe> {
-    return this.prisma.naipe.findUnique({
+  async findOne(id: string): Promise<Naipe> {
+    const record = await this.prisma.naipe.findUnique({
       where: { id },
     });
+
+    if (!record) {
+      throw new NotFoundException(`Registro com o Id '${id}' não encontrado.`);
+    }
+    return record;
   }
 
   update(id: string, dto: UpdateNaipeDto): Promise<Naipe> {
