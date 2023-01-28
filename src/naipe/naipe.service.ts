@@ -26,8 +26,13 @@ export class NaipeService {
     });
   }
 
-  update(id: number, updateNaipeDto: UpdateNaipeDto) {
-    return `This action updates a #${id} naipe`;
+  update(id: string, dto: UpdateNaipeDto): Promise<Naipe> {
+    const data: Partial<Naipe> = { ...dto };
+
+    return this.prisma.naipe.update({
+      where: { id },
+      data,
+    });
   }
 
   remove(id: number) {

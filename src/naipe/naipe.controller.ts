@@ -43,8 +43,11 @@ export class NaipeController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateNaipeDto: UpdateNaipeDto) {
-    return this.naipeService.update(+id, updateNaipeDto);
+  @ApiOperation({
+    summary: 'Atualizar um naipe pelo Id',
+  })
+  update(@Param('id') id: string, @Body() dto: UpdateNaipeDto): Promise<Naipe> {
+    return this.naipeService.update(id, dto);
   }
 
   @Delete(':id')
