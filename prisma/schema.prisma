@@ -14,8 +14,49 @@ model Naipe {
   id   String @id @default(uuid())
   name String @unique
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now()) @map("ceated_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("naipe")
+}
+
+model Instrumeto {
+  id          String @id @default(uuid())
+  name        String @unique
+  image       String
+  primeiraVoz String @map("primeira_voz")
+  segundaVoz  String @map("segunda_voz")
+  terceiraVoz String @map("terceira_voz")
+  naipe       String
+  metodos     String
+  musicos     String
+
+  createdAt DateTime @default(now()) @map("ceated_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("instrumento")
+}
+
+model Voz {
+  id          String @id @default(uuid())
+  name        String @unique
+  instrumento String
+
+  createdAt DateTime @default(now()) @map("ceated_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("Voz")
+}
+
+model User {
+  id       String @id @default(uuid())
+  nickname String @unique
+  name     String
+  password String
+  image    String
+
+  createdAt DateTime @default(now()) @map("ceated_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("User")
 }
