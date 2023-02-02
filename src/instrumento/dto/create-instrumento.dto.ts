@@ -1,10 +1,62 @@
+import { ApiProperty } from '@nestjs/swagger';
+import { IsString, IsUrl } from 'class-validator';
+
 export class CreateInstrumentoDto {
+  @IsString()
+  @ApiProperty({
+    description: 'nome do instrumento',
+    example: 'Violino',
+  })
   name: string;
+
+  @IsUrl()
+  @ApiProperty({
+    description: 'Url da imagem do instrumento',
+    example:
+      'data:image/jpeg;base64,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',
+  })
   image: string;
-  primeiraVoz: string;
-  segundaVoz: string;
-  terceiraVoz: string;
-  naipe: string;
-  metodos: string;
-  musicos: string;
+
+  @IsString()
+  @ApiProperty({
+    description: 'nome da primeira voz',
+    example: 'soprano',
+  })
+  primeiraVoz?: string;
+
+  @IsString()
+  @ApiProperty({
+    description: 'nome da segunda voz',
+    example: 'contralto',
+  })
+  segundaVoz?: string;
+
+  @IsString()
+  @ApiProperty({
+    description: 'nome da terceira voz',
+    example: 'tenor',
+  })
+  terceiraVoz?: string;
+
+  @IsString()
+  @ApiProperty({
+    description: 'nome do naipe de qual o instrumento faz parte',
+    example: 'cordas',
+  })
+  naipe?: string;
+
+  @IsString()
+  @ApiProperty({
+    description:
+      'nome dos metodos ultilizados na congregação para aprendizado do instrumento',
+    example: 'Suzuki',
+  })
+  metodos?: string;
+
+  @IsString()
+  @ApiProperty({
+    description: 'lista dos músicos que tocam esse instrumento',
+    example: 'Romildo, Rosalvo...',
+  })
+  musicos?: string;
 }

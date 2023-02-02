@@ -21,15 +21,15 @@ model Naipe {
 }
 
 model Instrumento {
-  id          String @id @default(uuid())
-  name        String @unique
+  id          String  @id @default(uuid())
+  name        String  @unique
   image       String
-  primeiraVoz String @map("primeira_voz")
-  segundaVoz  String @map("segunda_voz")
-  terceiraVoz String @map("terceira_voz")
-  naipe       String
-  metodos     String
-  musicos     String
+  primeiraVoz String? @map("primeira_voz")
+  segundaVoz  String? @map("segunda_voz")
+  terceiraVoz String? @map("terceira_voz")
+  naipe       String?
+  metodos     String?
+  musicos     String?
 
   createdAt DateTime @default(now()) @map("ceated_at")
   updatedAt DateTime @updatedAt @map("updated_at")
