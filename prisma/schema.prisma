@@ -20,7 +20,7 @@ model Naipe {
   @@map("naipe")
 }
 
-model Instrumeto {
+model Instrumento {
   id          String @id @default(uuid())
   name        String @unique
   image       String
