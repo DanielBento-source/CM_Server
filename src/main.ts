@@ -5,21 +5,21 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  
+
   app.useGlobalPipes(new ValidationPipe());
-  
+
   const config = new DocumentBuilder()
-  .setTitle('Cadastro de Músicos')
-  .setDescription('Aplicação para gestão dos Músicos da orquestra CCB')
-  .setVersion('1.0.0')
-  .addTag('status')
-  .addTag('naipe')
-  .build();
-  
-  
-    const document = SwaggerModule.createDocument(app, config);
-    SwaggerModule.setup('api', app, document);
-    
+    .setTitle('Cadastro de Músicos')
+    .setDescription('Aplicação para gestão dos Músicos da orquestra CCB')
+    .setVersion('1.0.0')
+    .addTag('status')
+    .addTag('naipe')
+    .addTag('instrumento')
+    .build();
+
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
+
   await app.listen(8181);
 }
 bootstrap();
