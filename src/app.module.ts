@@ -4,9 +4,10 @@ import { AppService } from './app.service';
 import { NaipeModule } from './naipe/naipe.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { InstrumentoModule } from './instrumento/instrumento.module';
+import { UserModule } from './user/user.module';
 
 @Module({
-  imports: [NaipeModule, PrismaModule, InstrumentoModule],
+  imports: [NaipeModule, PrismaModule, InstrumentoModule, UserModule],
   controllers: [AppController],
   providers: [AppService],
 })
