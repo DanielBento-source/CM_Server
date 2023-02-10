@@ -15,6 +15,7 @@ async function bootstrap() {
     .addTag('status')
     .addTag('naipe')
     .addTag('instrumento')
+    .addTag('user')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
