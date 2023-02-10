@@ -12,6 +12,15 @@ import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
+  private userSelect = {
+    id: true,
+    nickname: true,
+    name: true,
+    password: false,
+    image: true,
+    createdAt: true,
+    updatedAt: false,
+  };
   constructor(private readonly prisma: PrismaService) {}
 
   async create(dto: CreateUserDto): Promise<User> {
@@ -28,17 +37,21 @@ export class UserService {
     return this.prisma.user
       .create({
         data,
+        select: this.userSelect,
       })
       .catch(this.handleError);
   }
 
   findAll(): Promise<User[]> {
-    return this.prisma.user.findMany();
+    return this.prisma.user.findMany({
+      select: this.userSelect,
+    });
   }
 
   async findById(id: string): Promise<User> {
     const record = await this.prisma.user.findUnique({
       where: { id },
+      select: this.userSelect,
     });
 
     if (!record) {
@@ -73,6 +86,7 @@ export class UserService {
       .update({
         where: { id },
         data,
+        select: this.userSelect,
       })
       .catch(this.handleError);
   }
