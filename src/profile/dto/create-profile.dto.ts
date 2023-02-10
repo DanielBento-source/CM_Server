@@ -32,7 +32,7 @@ export class CreateProfileDto {
     description: 'Imagem de perfil do usuário.',
     example: 'https://avatars.githubusercontent.com/u/62419185?v=4',
   })
-  image: string;
+  imageProfile: string;
 
   @IsString()
   @ApiProperty({
