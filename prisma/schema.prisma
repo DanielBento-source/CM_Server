@@ -45,7 +45,7 @@ model Voz {
   createdAt DateTime @default(now()) @map("ceated_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  @@map("Voz")
+  @@map("voz")
 }
 
 model User {
@@ -58,5 +58,18 @@ model User {
   createdAt DateTime @default(now()) @map("ceated_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  @@map("User")
+  @@map("user")
+}
+
+model Profile {
+  id           String  @id @default(uuid())
+  nickname     String  @unique
+  password     String
+  imageProfile String  @map("image_profile")
+  occupation   String?
+
+  createdAt DateTime @default(now()) @map("ceated_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("profile")
 }
