@@ -17,33 +17,46 @@ model Naipe {
   createdAt DateTime @default(now()) @map("ceated_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
+  instrumentos Instrumento[]
+
   @@map("naipe")
 }
 
 model Instrumento {
-  id          String  @id @default(uuid())
-  name        String  @unique
-  image       String
-  primeiraVoz String? @map("primeira_voz")
-  segundaVoz  String? @map("segunda_voz")
-  terceiraVoz String? @map("terceira_voz")
-  naipe       String?
-  metodos     String?
-  musicos     String?
+  id      String  @id @default(uuid())
+  name    String  @unique
+  image   String
+  metodos String?
+  musicos String?
 
   createdAt DateTime @default(now()) @map("ceated_at")
   updatedAt DateTime @updatedAt @map("updated_at")
+
+  voz1  Voz?    @relation("primeiraVoz", fields: [vozId], references: [id])
+  vozId String? @map("voz_id")
+
+  voz2   Voz?    @relation(name: "segundaVoz", fields: [vozId2], references: [id])
+  vozId2 String? @map("voz_id2")
+
+  voz3   Voz?    @relation(name: "terceiraVoz", fields: [vozId3], references: [id])
+  vozId3 String? @map("voz_id3")
+
+  naipe   Naipe?  @relation(fields: [naipeId], references: [id])
+  naipeId String? @map("naipe_id")
 
   @@map("instrumento")
 }
 
 model Voz {
-  id          String @id @default(uuid())
-  name        String @unique
-  instrumento String
+  id   String @id @default(uuid())
+  name String @unique
 
   createdAt DateTime @default(now()) @map("ceated_at")
   updatedAt DateTime @updatedAt @map("updated_at")
+
+  instrumentosVoz1 Instrumento[] @relation("primeiraVoz")
+  instrumentosVoz2 Instrumento[] @relation("segundaVoz")
+  InstrumentosVoz3 Instrumento[] @relation("terceiraVoz")
 
   @@map("voz")
 }
@@ -58,6 +71,8 @@ model User {
   createdAt DateTime @default(now()) @map("ceated_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
+  profiles Profile[]
+
   @@map("user")
 }
 
@@ -67,6 +82,9 @@ model Profile {
   password     String
   imageProfile String  @map("image_profile")
   occupation   String?
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @map("user_id")
 
   createdAt DateTime @default(now()) @map("ceated_at")
   updatedAt DateTime @updatedAt @map("updated_at")
